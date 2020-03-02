@@ -6,7 +6,7 @@ namespace gun_master_9000{
 
         int capacity;
 
-        int rounds = 0;
+        protected int rounds = 0;
 
         public Gun(string name, int capacity) {
             this.name = name;
@@ -27,7 +27,7 @@ namespace gun_master_9000{
             }
         }
 
-        public void Reload() {
+        virtual public void Reload() {
             this.rounds = this.capacity;
 
         }
