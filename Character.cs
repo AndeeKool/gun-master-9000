@@ -30,5 +30,12 @@ namespace gun_master_9000
                 Console.WriteLine("*gun clicks*");
             }
         }
+
+        public void Reload() {
+             if (this.gun == null) {
+                throw new System.InvalidOperationException("Character can't shoot without a gun.");
+            }
+            this.gun.Reload();
+        }
     }
 }

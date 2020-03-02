@@ -1,16 +1,20 @@
 using System;
 using NUnit.Framework;
 
-namespace gun_master_9000 {
+namespace gun_master_9000
+{
     [TestFixture]
-    class UnitTests {
+    class UnitTests
+    {
 
         [Test, Description("Character without Gun can't shoot.")]
-        public void CharacterWithoutGunTest() {
+        public void CharacterWithoutGunTest()
+        {
             Bug bug = new Bug();
             Character john = new Character("John");
             Exception ex = Assert.Throws<System.InvalidOperationException>(
-                () => {
+                () =>
+                {
                     john.Shoot(bug);
                 }
             );
@@ -19,19 +23,34 @@ namespace gun_master_9000 {
         }
 
         [Test, Description("Character with gun and without target can't shoot.")]
-        public void CharacterWithGunTest() {
+        public void CharacterWithoutTargetTest()
+        {
             Character john = new Character("John");
-            Gun revolver = new Gun("Revolver", 8);
+            Gun revolver = new Gun("Revolver", 6);
             john.Equip(revolver);
-            //revolver.Reload();
             Exception ex = Assert.Throws<System.ArgumentException>(
-                () => {
+                () =>
+                {
                     john.Shoot(null);
                 }
             );
-            Assert.That(ex.Message, Is.EqualTo("Target can't be null (Parameter 'target')"));
-            
         }
 
+
+        [Test, Description("Character with gun and with target but without reloading can't shoot.")]
+        public void CharacterShootAfterReloadTest()
+        {
+            Character john = new Character("John");
+            Gun revolver = new Gun("Revolver", 8);
+            john.Equip(revolver);
+            Bug bug = new Bug();
+
+            john.Shoot(bug);
+            Assert.That(bug.IsDead(), Is.EqualTo(false));
+
+            john.Reload();
+            john.Shoot(bug);
+            Assert.That(bug.IsDead(), Is.EqualTo(true));
+        }
     }
 }
