@@ -1,7 +1,7 @@
 using System;
 
 namespace gun_master_9000{
-    class Gun {
+    class Gun : Target {
         string name;
 
         int capacity;
@@ -34,6 +34,14 @@ namespace gun_master_9000{
 
         public int GetRemainingRounds() {
             return this.rounds;
+        }
+
+        public void Shot() {
+
+        }
+
+        public bool IsDead() {
+            return false;
         }
         
     }
