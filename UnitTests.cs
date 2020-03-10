@@ -96,5 +96,69 @@ namespace gun_master_9000
             john.Shoot(theOne);
             Assert.That(theOne.IsDead(), Is.EqualTo(true));
         }
+
+        [Test, Description("Try to shoot a target with multiple lifes.")]
+        public void MultipleLifesTarget() {
+            Character john = new Character("John");
+            Gun revolver = new Gun("Revolver", 8);
+            john.Equip(revolver);
+
+            Cat cat = new Cat(3);
+
+            john.Reload();
+
+            john.Shoot(cat);
+            Assert.That(cat.IsDead(), Is.EqualTo(false));
+
+            john.Shoot(cat);
+            Assert.That(cat.IsDead(), Is.EqualTo(false));
+
+            john.Shoot(cat);
+            Assert.That(cat.IsDead(), Is.EqualTo(false));
+
+            john.Shoot(cat);
+            Assert.That(cat.IsDead(), Is.EqualTo(true));
+        }
+
+        [Test, Description("Try to shoot a ninja student who can dodge half of the times.")]
+        public void NinjaStudentTest() {
+            Character john = new Character("John");
+            Gun revolver = new Gun("Revolver", 8);
+            john.Equip(revolver);
+
+            NinjaStudent babyNinja = new NinjaStudent();
+
+            john.Reload();
+
+            babyNinja.Dodge();
+
+            john.Shoot(babyNinja);
+            Assert.That(babyNinja.IsDead(), Is.EqualTo(false));
+
+            babyNinja.Dodge();
+
+            john.Shoot(babyNinja);
+            Assert.That(babyNinja.IsDead(), Is.EqualTo(true));
+        }
+
+        [Test, Description("Try to shoot a ninja master who always dodges.")]
+        public void NinjaMasterTest() {
+            Character john = new Character("John");
+            Gun revolver = new Gun("Revolver", 8);
+            john.Equip(revolver);
+
+            NinjaMaster senseiNinja = new NinjaMaster(true);
+
+            john.Reload();
+
+            john.Shoot(senseiNinja);
+            Assert.That(senseiNinja.IsDead(), Is.EqualTo(false));
+
+            john.Shoot(senseiNinja);
+            Assert.That(senseiNinja.IsDead(), Is.EqualTo(false));
+
+            john.Shoot(senseiNinja);
+            Assert.That(senseiNinja.IsDead(), Is.EqualTo(false));
+        }
     }
 }
